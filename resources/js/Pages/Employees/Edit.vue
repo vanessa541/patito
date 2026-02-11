@@ -19,7 +19,7 @@ const form = useForm({
     area: props.employee.area,
     puesto: props.employee.puesto,
     fecha_ingreso: props.employee.fecha_ingreso,
-    status: props.employee.status, // 👈 agregado correctamente
+    status: props.employee.status, 
 })
 
 const submit = () => {
@@ -49,7 +49,7 @@ const submit = () => {
             <input v-model="form.puesto" class="input" placeholder="Puesto" />
             <input v-model="form.fecha_ingreso" type="date" class="input" />
 
-            <!-- Checkbox de estado -->
+            <!-- Checkbox de estatus -->
             <div class="flex items-center gap-2">
                 <input 
                     type="checkbox"
