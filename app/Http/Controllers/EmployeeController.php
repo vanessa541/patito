@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use App\Models\Employee;
+
 
 class EmployeeController extends Controller
 {
@@ -12,7 +15,14 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
+        //mostrar lista de empleados
+       $employees = Employee::where('user_id', auth()->id())
+        ->latest()
+        ->get();
+
+        return Inertia::render('Employees/Index', [
+            'employees' => $employees
+        ]);
     }
 
     /**
@@ -21,6 +31,8 @@ class EmployeeController extends Controller
     public function create()
     {
         //
+         return Inertia::render('Employees/Create');
+    
     }
 
     /**
@@ -45,8 +57,8 @@ class EmployeeController extends Controller
         'fecha_ingreso' => 'required|date',
 
     ]);
-     $validated['user_id'] = Auth::id();
-
+    $validated['user_id'] = auth()->id();
+    $validated['status'] = 1;   
     Employee::create($validated);
 
     return redirect()->route('employees.index');
