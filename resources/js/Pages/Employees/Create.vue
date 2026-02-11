@@ -42,6 +42,9 @@ const submit = () => {
 
             <input v-model="form.area" type="text" placeholder="Área" class="input" />
             <input v-model="form.puesto" type="text" placeholder="Puesto" class="input" />
+             <label class="block text-sm font-medium text-gray-700 mb-1">
+            Fecha de ingreso
+            </label>
             <input v-model="form.fecha_ingreso" type="date" class="input" />
 
             <div class="flex gap-3 mt-6">

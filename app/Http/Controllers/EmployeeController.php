@@ -91,23 +91,37 @@ class EmployeeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Employee $employee)
-    {
-        //
-        if ($employee->user_id !== auth()->id()) {
+   public function update(Request $request, Employee $employee)
+{
+    // Seguridad: solo puede editar sus propios empleados
+    if ($employee->user_id !== auth()->id()) {
         abort(403);
-        }
-
-        $validated = $request->validate([
-            'nombre' => 'required|string|max:255',
-            'telefono' => 'required|string|max:20',
-            'email' => 'required|email',
-        ]);
-
-        $employee->update($validated);
-
-        return redirect()->route('employees.index');
     }
+
+    $validated = $request->validate([
+        'nombre' => 'required|string|max:255',
+        'telefono' => 'required|string|max:20',
+        'email' => 'required|email',
+        'calle' => 'required|string',
+        'numero' => 'required|string',
+        'colonia' => 'required|string',
+        'codigo_postal' => 'required|string',
+        'ciudad' => 'required|string',
+        'estado' => 'required|string',
+        'pais' => 'required|string',
+        'area' => 'required|string',
+        'puesto' => 'required|string',
+        'fecha_ingreso' => 'required|date',
+        'status' => 'required|boolean',
+    ]);
+
+    $employee->update($validated);
+
+    return redirect()
+        ->route('employees.index')
+        ->with('success', 'Empleado actualizado correctamente');
+}
+
 
     /**
      * Remove the specified resource from storage.
