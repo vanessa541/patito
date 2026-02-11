@@ -29,6 +29,27 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         //
+         $validated = $request->validate([
+        'nombre' => 'required|string|max:200',
+        'telefono' => 'required|string|max:10',
+        'email' => 'required|email',
+        'calle' => 'required|string',
+        'numero' => 'required|string',
+        'colonia' => 'required|string',
+        'codigo_postal' => 'required|string',
+        'ciudad' => 'required|string',
+        'estado' => 'required|string',
+        'pais' => 'required|string',
+        'area' => 'required|string',
+        'puesto' => 'required|string',
+        'fecha_ingreso' => 'required|date',
+
+    ]);
+     $validated['user_id'] = Auth::id();
+
+    Employee::create($validated);
+
+    return redirect()->route('employees.index');
     }
 
     /**
