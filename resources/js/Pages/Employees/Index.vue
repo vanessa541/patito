@@ -1,14 +1,20 @@
 <script setup>
-import { Link } from '@inertiajs/vue3'
+import { Link, useForm } from '@inertiajs/vue3'
 
 defineProps({
     employees: Array
 })
+
+const deleteEmployee = (id) => {
+    if (confirm('¿Seguro que deseas eliminar este empleado?')) {
+        useForm({}).delete(`/employees/${id}`)
+    }
+}
 </script>
 
 <template>
     <div class="p-6">
-        <div class="flex justify-between items-center mb-4">
+        <div class="flex justify-between items-center mb-6">
             <h1 class="text-2xl font-bold">Lista de Empleados</h1>
 
             <Link
@@ -19,16 +25,33 @@ defineProps({
             </Link>
         </div>
 
-        <ul>
+        <ul class="space-y-3">
             <li 
                 v-for="employee in employees" 
                 :key="employee.id"
-                class="border-b py-2"
+                class="border rounded-lg p-4 flex justify-between items-center shadow-sm"
             >
-                {{ employee.nombre }} - {{ employee.email }}
+                <div>
+                    <strong class="text-lg">{{ employee.nombre }}</strong><br>
+                    <small class="text-gray-600">{{ employee.email }}</small>
+                </div>
+
+                <div class="flex gap-2">
+                    <Link
+                        :href="`/employees/${employee.id}/edit`"
+                        class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded"
+                    >
+                        Editar
+                    </Link>
+
+                    <button
+                        @click="deleteEmployee(employee.id)"
+                        class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded"
+                    >
+                        Eliminar
+                    </button>
+                </div>
             </li>
         </ul>
     </div>
 </template>
-
-

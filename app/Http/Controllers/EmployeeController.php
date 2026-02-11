@@ -75,24 +75,51 @@ class EmployeeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
+    public function edit(Employee $employee)
+    {   
+        // Seguridad: que solo pueda editar sus propios empleados
+        if ($employee->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        return Inertia::render('Employees/Edit', [
+            'employee' => $employee
+        ]);
     }
+
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Employee $employee)
     {
         //
+        if ($employee->user_id !== auth()->id()) {
+        abort(403);
+        }
+
+        $validated = $request->validate([
+            'nombre' => 'required|string|max:255',
+            'telefono' => 'required|string|max:20',
+            'email' => 'required|email',
+        ]);
+
+        $employee->update($validated);
+
+        return redirect()->route('employees.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Employee $employee)
     {
         //
+        if ($employee->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $employee->delete();
+        return redirect()->route('employees.index');    
     }
 }
