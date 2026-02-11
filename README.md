@@ -25,6 +25,12 @@ Este sistema permite:
 
 Cada usuario únicamente puede visualizar y administrar sus propios empleados.
 
+## Nota HTTPS
+El sistema fue desarrollado y probado en entorno local utilizando 
+`http://127.0.0.1:8000`, por lo que no se configuró HTTPS debido a que se trata de un ambiente de desarrollo.
+
+En un entorno de producción, se recomienda implementar HTTPS mediante un certificado SSL para garantizar la confidencialidad e integridad de los datos transmitidos.
+
 Tecnologías utilizadas
 
 - Laravel 10+
