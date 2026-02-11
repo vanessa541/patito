@@ -14,7 +14,7 @@ Se incluye un diagrama de flujo conceptual de nivel 1 para representar la intera
 
 
 ---
-Este sistema permite:
+## Este sistema permite:
 
 - Registro e inicio de sesión de usuarios
 - Crear, listar, editar y eliminar empleados (CRUD)
@@ -25,13 +25,13 @@ Este sistema permite:
 
 Cada usuario únicamente puede visualizar y administrar sus propios empleados.
 
-## Nota HTTPS
+### Nota HTTPS
 El sistema fue desarrollado y probado en entorno local utilizando 
 `http://127.0.0.1:8000`, por lo que no se configuró HTTPS debido a que se trata de un ambiente de desarrollo.
 
 En un entorno de producción, se recomienda implementar HTTPS mediante un certificado SSL para garantizar la confidencialidad e integridad de los datos transmitidos.
 
-Tecnologías utilizadas
+## Tecnologías utilizadas
 
 - Laravel 10+
 - Vue 3
