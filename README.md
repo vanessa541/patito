@@ -1,59 +1,162 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🏢 CRUD de Empleados – Patito S.A. de C.V.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 📌 Descripción del Proyecto
 
-## About Laravel
+La empresa **Patito S.A. de C.V.**, con más de 10 años de operación y presencia en múltiples sucursales a nivel nacional, enfrenta dificultades en la gestión de la información de su personal debido a la falta de una base de datos centralizada.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Este proyecto desarrolla un sistema web que permite administrar la información de empleados de forma segura, centralizada y eficiente, garantizando control de acceso y trazabilidad mediante autenticación de usuarios.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
+## DFD N1
+Se incluye un diagrama de flujo conceptual de nivel 1 para representar la interacción entre actores, procesos y almacenamiento de datos.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+<img width="578" height="561" alt="image" src="https://github.com/user-attachments/assets/9bb772d2-cfa1-4350-83c2-16025e0e0cf9" />
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+---
+Este sistema permite:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Registro e inicio de sesión de usuarios
+- Crear, listar, editar y eliminar empleados (CRUD)
+- Asociación de cada empleado a un usuario autenticado
+- Protección de rutas mediante autenticación
+- Validación de datos en backend
+- Manejo de estado activo/inactivo mediante campo booleano
 
-## Laravel Sponsors
+Cada usuario únicamente puede visualizar y administrar sus propios empleados.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Tecnologías utilizadas
 
-### Premium Partners
+- Laravel 10+
+- Vue 3
+- InertiaJS
+- Axios
+- MariaDB / MySQL
+- TailwindCSS
+- Node.js
+- Composer
+  
+## 🗄 Base de Datos
+### Tabla: users
+- id
+- name
+- email
+- password
+- status (activo/inactivo)
+- fecha último inicio de sesión
+- timestamps
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### Tabla: employees
+- id
+- user_id (FK)
+- nombre
+- telefono
+- email
+- calle
+- numero
+- colonia
+- codigo_postal
+- ciudad
+- estado
+- pais
+- area
+- puesto
+- fecha_ingreso
+- status (boolean)
+- timestamps
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 🔐 Seguridad
 
-## Code of Conduct
+- Rutas protegidas con middleware `auth`
+- Validación de formularios en backend
+- Relación segura entre usuario y empleados
+- Control de acceso para edición y eliminación
+- Contraseñas encriptadas automáticamente por Laravel
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## 🚀 Instalación
+Clonar el repositorio:
+```bash
+git clone https://github.com/vanessa541/patito.git
+cd patito
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Instalar dependencias PHP:
+composer install
+Instalar dependencias Node:
+npm install
 
-## License
+Copiar archivo de entorno:
+cp .env.example .env
+Configurar credenciales de base de datos en .env
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Generar clave de aplicación:
+php artisan key:generate
+
+Ejecutar migraciones:
+php artisan migrate
+
+▶️ Ejecutar el proyecto
+En una terminal:
+php artisan serve
+En otra terminal:
+npm run dev
+
+Abrir en el navegador:
+http://127.0.0.1:8000
+```
+
+📌 Funcionalidades implementadas
+- Registro de usuario
+- Inicio de sesión (login)
+- CRUD completo de empleados
+  - Crear empleados
+  - Listar empleados
+  - Editar empleados
+  - Eliminar empleados
+  - Confirmación antes de eliminar registros
+- Asociación empleado-usuario (relación 1:N)
+- Protección de rutas mediante autenticación
+- Validación de datos en backend
+
+## 🌐 Rutas del Sistema
+
+### 🔐 Autenticación (Laravel Breeze)
+
+- Registro de usuario  
+  `GET /register`
+
+- Inicio de sesión  
+  `GET /login`
+
+- Cierre de sesión  
+  `POST /logout`
+
+- Dashboard (requiere autenticación)  
+  `GET /dashboard`
+
+---
+
+### 👥 Gestión de Empleados (protegidas con middleware auth)
+
+- Listar empleados  
+  `GET /employees`
+
+- Formulario para crear empleado  
+  `GET /employees/create`
+
+- Guardar nuevo empleado  
+  `POST /employees`
+
+- Formulario para editar empleado  
+  `GET /employees/{id}/edit`
+
+- Actualizar empleado  
+  `PUT /employees/{id}`
+
+- Eliminar empleado  
+  `DELETE /employees/{id}`
+
+
